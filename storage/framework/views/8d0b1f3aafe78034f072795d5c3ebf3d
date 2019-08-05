@@ -1,0 +1,204 @@
+<?php $__env->startSection('content'); ?>
+<section id="search_container">
+
+ 	<div id="search">
+
+        <?php echo Form::open(["url" => "restaurants/find"]); ?>
+
+        <h2 style="color:#fff;text-shadow: -3px -1px 3px rgba(0,0,0,0.5),1px 1px 1px #000,2px 4px 2px rgba(0,0,0,0.4),0 0 7px rgba(0,0,0,0.4);">Restaurant Reservations in Udaipur</h2>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="restaurant_word" name="search_word" placeholder="Search by Restaurant name or Cuisine name..">
+                        <!-- <div id="suggesstion-box"></div> -->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn_1 green" type="submit" name="search restaurant" style="padding:0.82em 1.2em;"><i class="icon-search"></i>Search now</button>
+                </div>
+            </div><!-- End row -->
+            
+        <?php echo Form::close(); ?>
+
+
+	</div>
+</section><!-- End hero -->
+
+    <div class="container margin_60">
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6 text-center">
+                <p>
+                    <a href="<?php echo e(URL::asset("restaurants")); ?>"><img src="<?php echo e(URL::asset("assets/images/lake-view2.jpg")); ?>" alt="Lake View Restaurants" title="Lake View Restaurants" class="img-responsive"></a>
+                </p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+                <p>
+                    <a href="<?php echo e(URL::asset("restaurants")); ?>"><img src="<?php echo e(URL::asset("assets/images/rooftop2.jpg")); ?>" alt="Roof Top Restaurants" title="Roof Top Restaurants" class="img-responsive"></a>
+                </p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+                <p>
+                    <a href="<?php echo e(URL::asset("restaurants")); ?>"><img src="<?php echo e(URL::asset("assets/images/romantic2.jpg")); ?>" alt="Romantic Restaurants" title="Romantic Restaurants" class="img-responsive"></a>
+                </p>
+            </div>
+            <div class="col-md-3 col-sm-6 text-center">
+                <p>
+                    <a href="<?php echo e(URL::asset("restaurants")); ?>"><img src="<?php echo e(URL::asset("assets/images/royal2.jpg")); ?>" alt="Royal Restaurants" title="Royal Restaurants" class="img-responsive"></a>
+                </p>
+            </div>
+        </div><!-- End row -->
+        <hr>
+
+
+        <div class="row add_bottom_45">
+            <div class="col-md-4 other_tours">
+                <h3>Popular Cuisines</h3>
+                <ul>
+                    <?php foreach($cuisines as $cuisine): ?>
+                    <li><a href="#"><i class="icon-food-1"></i><?php echo e($cuisine->name); ?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="col-md-4 other_tours">
+                <h3>Newly Added Restaurants</h3>
+                <ul>
+                    <?php foreach($newrestaurants as $restaurant): ?>
+                    <li><a href="<?php echo e(URL::asset('restaurants/'.$restaurant->slug)); ?>"><i class="icon-restaurant"></i><?php echo e($restaurant->restaurant_name); ?><span class="other_tours_price">Rs <?php echo e($restaurant->price); ?></span></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="col-md-4 other_tours" style="padding-top: 2em;">
+                <div class="box_style_4">
+                    <i class="icon_set_1_icon-90"></i>
+                    <h4><span>Book</span> by phone</h4>
+                        <a href="tel://09460718986" class="phone">+91 9460718986</a>
+                    <small>Monday to Friday 9.00am - 7.30pm</small>
+                </div>
+            </div>
+
+        </div><!-- End row -->
+
+        <hr>
+
+        <div class="main_title">
+        			<h2>What <span>customers </span>says</h2>
+
+        	</div>
+
+        	<div class="row">
+        		<div class="col-md-6">
+        			<div class="review_strip">
+        				
+        				<h4>Jhon Doe</h4>
+        				<p>
+        					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+        				</p>
+        				<div class="rating">
+        					<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i><i class=" icon-star-empty"></i>
+        				</div>
+        			</div><!-- End review strip -->
+        		</div>
+
+        		<div class="col-md-6">
+        			<div class="review_strip">
+        				
+        				<h4>Mark Schulz</h4>
+        				<p>
+        					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+        				</p>
+        				<div class="rating">
+        					<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i><i class=" icon-star-empty"></i>
+        				</div>
+        			</div><!-- End review strip -->
+        		</div>
+        	</div><!-- End row -->
+
+        	<div class="row">
+        		<div class="col-md-6">
+        			<div class="review_strip">
+        				
+        				<h4>Tony Costello</h4>
+        				<p>
+        					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+        				</p>
+        				<div class="rating">
+        					<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i><i class=" icon-star-empty"></i>
+        				</div>
+        			</div><!-- End review strip -->
+        		</div>
+
+        		<div class="col-md-6">
+        			<div class="review_strip">
+        				
+        				<h4>Peter Gabriel</h4>
+        				<p>
+        					 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+        				</p>
+        				<div class="rating">
+        					<i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i><i class=" icon-star-empty"></i>
+        				</div>
+        			</div><!-- End review strip -->
+        		</div>
+        	</div><!-- End row -->
+
+    </div><!-- End container -->
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('myscript'); ?>
+<script type="text/javascript">
+
+$("#restaurant_word").autocomplete({
+    source: function( request, response )
+    {
+    $.ajax({
+    url: "<?php echo e(URL::asset('restaurants/search')); ?>",
+    type: "post",
+        dataType: "json",
+        data: {
+        search_word: request.term,
+        _token: $('input[name=_token]').val()
+        },
+        success: function( data )
+        {
+        response(
+        $.map(data, function(item) {
+        return {
+        value: item.restaurant_name,
+        selectedId: item.slug
+        }
+        })
+        );
+        }
+        });
+        },
+        minLength: 1,
+        select: function(event, ui )
+        {
+        if(ui.item) {
+        $(event.target).val(ui.item.label);
+
+        }
+        return false;
+        },
+        open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+        }).autocomplete( "instance" )._renderItem = function (ul, item) {
+                                        var inner_html = '<a href="<?php echo e(URL::asset('restaurants/')); ?>/'+ item.selectedId +'">' + item.label + '</a>';
+                                        return $("<li></li>")
+                                                .data("item.autocomplete", item)
+                                                .append(inner_html)
+                                                .appendTo(ul);
+                                    };
+
+
+</script>
+
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.front', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

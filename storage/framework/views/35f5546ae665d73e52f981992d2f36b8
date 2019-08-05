@@ -1,0 +1,331 @@
+<?php $__env->startSection('content'); ?>
+<?php //var_dump($restaurant);
+//var_dump($restaurant_images);
+//var_dump($timing);
+//exit; ?>
+ <section class="parallax-window" data-parallax="scroll" data-image-src="<?php echo e(URL::asset($restaurant->banner_image_path)); ?>" data-natural-width="1400" data-natural-height="470">
+    <div class="parallax-content-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class=" icon-star-empty"></i></span>
+                    <h1><?php echo e($restaurant->restaurant_name); ?> Restaurant</h1>
+                    <span><?php echo e($restaurant->address); ?></span><br>
+                    <?php if(count($timing)>0): ?>
+            <span>Timings <?php echo e($timing[0]->start_time); ?> to <?php echo e($timing[0]->end_time); ?></span>
+            <?php endif; ?>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div id="price_single_main" class="hotel">
+                        from/per person <span><sup>Rs</sup><?php echo e($restaurant->price); ?></span>
+                        
+                        <?php if(count($deals)>0): ?>
+                            <?php foreach($deals as $deal): ?>
+                                <?php if($deal->discount): ?>    
+                                    <h4 style="color:white;"><?php echo e($deal->discount); ?> % Off Available</h4>
+                                    <?php break; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section><!-- End section -->
+
+    <div id="position">
+            <div class="container">
+                        <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Restaurants</a></li>
+                        <li><?php echo e($restaurant->restaurant_name); ?></li>
+                        </ul>
+            </div>
+    </div><!-- End Position -->
+
+    
+     <div class="collapse" id="collapseMap">
+        <div id="map" class="map"></div>
+    </div><!-- End Map -->
+    
+    <div class="container margin_60">
+   
+    <div class="row">
+        <div class="col-md-8" id="single_tour_desc">
+            
+            <p class="visible-sm visible-xs"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a></p><!-- Map button for tablets/mobiles -->
+            <?php if(count($restaurant_images)>0): ?>
+            <div id="Img_carousel" class="slider-pro">
+                <div class="sp-slides">
+                    <?php foreach($restaurant_images as $image): ?>
+                    
+                    
+                    <div class="sp-slide">
+                        <img alt="" class="sp-image" src="<?php echo e(URL::asset($image->image_path)); ?>" 
+                        data-src="<?php echo e(URL::asset($image->image_path)); ?>" 
+                        data-small="<?php echo e(URL::asset($image->image_path)); ?>" 
+                        data-medium="<?php echo e(URL::asset($image->image_path)); ?>" 
+                        data-large="<?php echo e(URL::asset($image->image_path)); ?>" 
+                        data-retina="<?php echo e(URL::asset($image->image_path)); ?>">
+                        <h3 class="sp-layer sp-black sp-padding" data-horizontal="40" data-vertical="40" data-show-transition="left">
+                        <?php echo e($image->title); ?> </h3>
+                        <p class="sp-layer sp-black sp-padding" data-position="bottomLeft" data-vertical="0" data-width="100%" data-show-transition="up">
+                             <?php echo e($image->description); ?>
+
+                        </p>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="sp-thumbnails">
+                <?php foreach($restaurant_images as $image): ?>
+                    <img alt="" class="sp-thumbnail" src="<?php echo e(URL::asset($image->image_path)); ?>">
+                   <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+            <hr>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Description</h3>
+                </div>
+                <div class="col-md-9">
+                    <p>
+                        <?php echo e($restaurant->about); ?>
+
+                    </p>
+                    <h4>Restaurant facilities</h4>
+                    <!-- <p>
+                        Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi.
+                    </p> -->
+
+                    <div class="row">
+                        <?php if(count($facilities)>0): ?>
+                        <div class="col-md-6 col-sm-6">
+                            <ul class="list_ok">
+                                <?php foreach($facilities as $facility): ?>
+                                <li><?php echo e($facility->name); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                        <?php if(count($cuisines)>0): ?>
+                        <div class="col-md-6 col-sm-6">
+                            <ul class="list_ok">
+                                <?php foreach($cuisines as $cuisine): ?>
+                                <li><?php echo e($cuisine->name); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                    </div><!-- End row  -->
+                </div><!-- End col-md-9  -->
+            </div><!-- End row  -->
+            
+            <hr>
+            <?php if(count($menus)>0): ?>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Menu</h3>
+                </div>
+                <div class="col-md-9">
+                     <div class="carousel magnific-gallery">
+                        <?php foreach($menus as $menu): ?>
+                        <div class="item">
+                            <a href="<?php echo e(URL::asset($menu->image_path)); ?>"><img src="<?php echo e(URL::asset($menu->image_path)); ?>" alt="Image"></a>
+                        </div>
+                        <?php endforeach; ?>
+                     </div><!-- End photo carousel  -->
+                     
+                </div><!-- End col-md-9  -->
+            </div><!-- End row  -->
+            
+            <hr>
+            <?php endif; ?>
+            <?php if(count($deals)>0): ?>
+            <div class="row">
+            <div class="col-md-3">
+                    <h3>Deals</h3>
+                </div>
+                <div class="col-md-9">
+                    <?php $i=1; ?>
+                    <?php foreach($deals as $deal): ?>
+                        <?php if($i>1): ?>
+                            <hr>
+                        <?php endif; ?>
+                    <?php if($deal->deal): ?>    
+                    <h4><?php echo e($deal->deal); ?></h4>
+                    <p>From <?php echo e($deal->from_date); ?> to <?php echo e($deal->to_date); ?> </p>
+                    <?php $i++; ?>
+                    <?php endif; ?>
+                    
+                    
+                    <?php endforeach; ?>
+                </div><!-- End col-md-9  -->
+            </div><!-- End row  -->
+            
+            <hr>
+            <?php endif; ?>
+
+            <?php if(count($events)>0): ?>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Events</h3>
+                </div>
+                <div class="col-md-9">
+                    <?php $i=1; ?>
+                     <?php foreach($events as $event): ?>
+                        <?php if($i>1): ?>
+                            <hr>
+                        <?php endif; ?>
+                     <h4><?php echo e($event->name); ?></h4>
+                    <p><?php echo e($event->description); ?></p>
+                    
+                    <p>Date :- <?php echo e($event->from_date); ?> to <?php echo e($event->to_date); ?> </p>
+                    <p>Timings :- <?php echo e($event->start_time); ?> to <?php echo e($event->end_time); ?> </p>
+
+                     <div class="carousel magnific-gallery">
+                        <div class="item">
+                            <a href="<?php echo e(URL::asset($event->image_path)); ?>"><img src="<?php echo e(URL::asset($event->image_path)); ?>" alt="Image"></a>
+                        </div>
+                     </div><!-- End photo carousel  -->
+                     <?php endforeach; ?>
+                </div><!-- End col-md-9  -->
+            </div><!-- End row  -->
+            
+            <hr>
+            <?php endif; ?>
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>Reviews</h3>
+                </div>
+                <div class="col-md-9">
+                    <div id="score_detail"><span>7.5</span>Good <small>(Based on 34 reviews)</small></div><!-- End general_rating -->
+                    <div class="row" id="rating_summary">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Position
+                                    <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                                    </div>
+                                </li>
+                                <li>Comfort
+                                <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Price
+                                <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                                    </div>
+                                </li>
+                                <li>Quality
+                                <div class="rating">
+                                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div><!-- End row -->
+                    <hr>
+                    <div class="review_strip_single">
+                        <img src="<?php echo e(URL::asset("assets/img/avatar1.jpg")); ?>" alt="" class="img-circle">
+                        <small> - 10 March 2015 -</small>
+                        <h4>Jhon Doe</h4>
+                        <p>
+                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                        </p>
+                        <div class="rating">
+                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                        </div>
+                    </div><!-- End review strip -->
+                    
+                    <div class="review_strip_single">
+                        <img src="<?php echo e(URL::asset("assets/img/avatar2.jpg")); ?>" alt="" class="img-circle">
+                        <small> - 10 March 2015 -</small>
+                        <h4>Jhon Doe</h4>
+                        <p>
+                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                        </p>
+                        <div class="rating">
+                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                        </div>
+                    </div><!-- End review strip -->
+                    
+                    <div class="review_strip_single last">
+                        <img src="<?php echo e(URL::asset("assets/img/avatar3.jpg")); ?>" alt="" class="img-circle">
+                        <small> - 10 March 2015 -</small>
+                        <h4>Jhon Doe</h4>
+                        <p>
+                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus."
+                        </p>
+                        <div class="rating">
+                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
+                        </div>
+                    </div><!-- End review strip -->
+                </div>
+            </div>
+        </div><!--End  single_tour_desc-->
+        
+        <aside class="col-md-4">
+        <p class="hidden-sm hidden-xs">
+            <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
+        </p>
+                     
+        <div class="box_style_1 expose">
+            <h3 class="inner">Reserve table</h3>
+            <?php echo Form::open(["url" => "restaurant/order","class"=>"form-horizontal push-5-t"]); ?>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label><i class="icon-calendar-7"></i> Date</label>
+                        <input class="date-pick form-control" name="date" data-date-format="M d, D" type="text">
+                        <input type="hidden" name="restaurant_id" id="restaurant_id" value="<?php echo e($restaurant->id); ?>">
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                     <div class="form-group">
+                        <label><i class="icon-calendar-7"></i> Time</label>
+                        <input class="time-pick form-control" name="time" value="12:00 PM" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <label>People</label>
+                        <div class="numbers-row">
+                            <input type="text" value="1" id="people" class="qty2 form-control" name="people">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+           <button type="submit" class="btn_full">Reserve Now</button>
+            <?php echo Form::close(); ?>
+
+        </div><!--/box_style_1 -->
+        
+        <div class="box_style_4">
+            <i class="icon_set_1_icon-90"></i>
+            <h4><span>Need Help</h4>
+            <a href="tel://9460718986" class="phone">9460718986</a>
+        </div>
+        
+        </aside>
+
+
+    </div><!--End row -->
+
+    </div><!--End container -->
+
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.front', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,169 @@
+@extends('layout.front')
+
+@section('content')
+
+<div style="height:100px;background-color:#286bc6"></div>
+<div id="position">
+            <div class="container">
+                        <ul>
+                        <li><a href="http://www.mewarvilas.com">Home</a></li>
+                        <li>User Orders</li>
+                        </ul>
+            </div>
+    </div><!-- End Position -->
+
+    <div class="container margin_60">
+    <div class="row">
+    <div class="col-md-8">
+    <h2>Your Orders History</h2>
+    <hr>
+        @if($orders)
+    	<table class="table table-striped cart-list add_bottom_30">
+            <thead>
+            <tr>
+                <th>Restaurant</th>
+                <th>People</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach($orders as $order)
+            <?php //var_dump($order);exit; ?>
+            <tr>
+                <td>
+                    <div class="thumb_cart">
+                        <a href="#"><img src="{{ URL::asset($order->banner_image_path) }}" alt=""></a>
+                    </div>
+                     <span class="item_cart"><a href="#">{{ $order->restaurant_name }} Restaurant</a></span>
+                </td>
+                <td>
+                    <strong>{{ $order->people }}</strong>
+                </td>
+                <td>
+                    <strong><?php  echo date("d M Y", strtotime($order->date)); ?></strong>
+                </td>
+                <td>
+                    <strong>{{ $order->time }}</strong>
+                </td>
+                <td>
+                    {!! Form::open(['method'=>'POST','url'=>['order/cancel',$order->order_id]]) !!}
+                        {!! Form::button('Cancel', array('type' => 'submit', 'class' => 'btn btn-danger')) !!}
+                    {!! Form::close() !!}
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            </table>
+        @else
+        <div class="alert alert-info">
+          <strong>No Orders Found!</strong> Book your favourite restaurant Now.
+        </div>
+        @endif
+    </div><!-- End col-md-8 -->
+
+    <aside class="col-md-4">
+
+    <div class="box_style_4">
+        <i class="icon_set_1_icon-57"></i>
+        <h4>Need <span>Help?</span></h4>
+        <a href="tel://+919460718986" class="phone">9460718986</a>
+        <small>Monday to Friday 9.00am - 7.30pm</small>
+    </div>
+    </aside><!-- End aside -->
+
+</div><!--End row -->
+</div><!--End container -->
+
+<!-- Modal Single room-->
+<div class="modal fade" id="modal_single_room" tabindex="-1" role="dialog" aria-labelledby="modal_single_room" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal_single_room">Single Room</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        	Lorem ipsum dolor sit amet, at omnes deseruisse pri. Quo aeterno legimus insolens ad. Sit cu detraxit constituam, an mel iudico constituto efficiendi. Mea liber ridens inermis ei, mei legendos vulputate an, labitur tibique te qui.
+        </p>
+        <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <ul class="list_icons">
+                                <li><i class="icon_set_1_icon-86"></i> Free wifi</li>
+                                <li><i class="icon_set_2_icon-116"></i> Plasma Tv</li>
+                                <li><i class="icon_set_2_icon-106"></i> Safety  box</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <ul class="list_ok">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>No scripta electram necessitatibus sit</li>
+                                <li>Quidam percipitur instructior an eum</li>
+                            </ul>
+                        </div>
+                    </div><!-- End row  -->
+                     <div class="carousel magnific-gallery">
+                     	<div class="item">
+                        	<a href="img/carousel/1.jpg"><img src="img/carousel/1.jpg" alt="Image"></a>
+                        </div>
+                        <div class="item">
+                        	<a href="img/carousel/2.jpg"><img src="img/carousel/2.jpg" alt="Image"></a>
+                        </div>
+                        <div class="item">
+                        	<a href="img/carousel/3.jpg"><img src="img/carousel/3.jpg" alt="Image"></a>
+                        </div>
+                        <div class="item">
+                        	<a href="img/carousel/4.jpg"><img src="img/carousel/4.jpg" alt="Image"></a>
+                        </div>
+                     </div><!-- End photo carousel  -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{{--Delete Modal Begins--}}
+
+<div class="modal fade modal-danger" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Cancel Order</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>You are about to cancel order no-<span id="order_no"></span> </p>
+                <p>Do you want to proceed?</p>
+            </div>
+            {!! Form::open(["class"=>"form-horizontal push-5-t",'id'=>'confirm_delete_form']) !!}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                <button class="btn btn-danger" id="delete_btn" type="submit">Yes Cancel it</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+
+{{--Delete Modal ENds    --}}
+<script>
+$(document).ready(function() {
+    $('#concel_order').click(function () {
+
+      var data_id = '';
+
+      if (typeof $(this).data('id') !== 'undefined') {
+
+        data_id = $(this).data('id');
+      }
+      console.log(data_id);
+        $('#order_no').text(data_id);
+      $('#confirm_delete_form').attr("url","order/cancel/"+data_id);
+    })
+
+});
+</script>
+@stop
